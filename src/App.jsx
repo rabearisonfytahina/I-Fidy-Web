@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function App() {
   const { t, changeLanguage, language } = useLanguage(); // Ajoutez 'language' ici
-const [isQrFullScreen, setIsQrFullScreen] = useState(false);
+  const [isQrFullScreen, setIsQrFullScreen] = useState(false);
 
   // useEffect pour l'initialisation des scripts externes et des écouteurs d'événements
   useEffect(() => {
@@ -75,67 +75,53 @@ const [isQrFullScreen, setIsQrFullScreen] = useState(false);
                 {/* ***** Logo End ***** */}
                 {/* ***** Menu Start ***** */}
                 <ul className="nav">
-  <li className="scroll-to-section"><a href="#top" className="active">{t('home')}</a></li>
+                  <li className="scroll-to-section"><a href="#top" className="active">{t('home')}</a></li>
 
-  {/* Lien vers pages d'aide */}
-  <li className="scroll-to-section">
-<Link to="/aide">{t('aide')}</Link>
-</li>
+                  {/* Lien vers pages d'aide */}
+                  <li className="scroll-to-section">
+                    <Link to="/aide">{t('aide')}</Link>
+                  </li>
 
-  {/* Bouton Voter ici placé avant la langue */}
-  <li className="scroll-to-section">
-  
-  <Link to="/Vote">
-         {t('Voter ici').replace('VOter')}
-  </Link>
-    
-  </li>
+                  {/* Bouton Voter ici placé avant la langue */}
+                  <li className="scroll-to-section">
+                    <Link to="/Vote">{t('Voter ici').replace('VOter')}</Link>
+                  </li>
 
-  {/* Sélecteur de langue à droite avec bordure */}
-  <div className="main-red-button">
-    
-  <li className="scroll-to-section ">
-    <a
-      href="#"
-      onClick={(e) => {
-        e.preventDefault();
-        changeLanguage(language === 'mg' ? 'fr' : 'mg');
-      }}
-      
-      >
-      
-      {/* 🌐 Icône de langue ou remplace par <i className="fa fa-globe"></i> si tu utilises FontAwesome */}
-      <i className="fa fa-globe  " aria-hidden="true"></i>
-      
-      {language === 'mg' ? 'Français' : t('malagasy')}
-    </a>
-  </li>
-
-
- 
-</div>
-  <li
-  className={`qr-code-header ${isQrFullScreen ? "fullscreen" : ""}`}
->
-  {isQrFullScreen && (
-    <button
-      className="close-btn"
-      onClick={() => setIsQrFullScreen(false)}
-    >
-      &times;
-    </button>
-  )}
-  <img
-    src="/qrcode.png"
-    alt="QR Code"
-    onClick={() => setIsQrFullScreen(true)}
-  />
-  {!isQrFullScreen && <span>Scan moi !</span>}
-</li>
-
-
-
-</ul>
+                  {/* Sélecteur de langue à droite avec bordure */}
+                  <div className="main-red-button">                    
+                    <li className="scroll-to-section ">
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          changeLanguage(language === 'mg' ? 'fr' : 'mg');
+                        }}
+                      >                  
+                        {/* 🌐 Icône de langue ou remplace par <i className="fa fa-globe"></i> si tu utilises FontAwesome */}
+                        <i className="fa fa-globe  " aria-hidden="true"></i>                       
+                        {language === 'mg' ? 'Français' : t('malagasy')}
+                      </a>
+                    </li>
+                  </div>
+                  <li
+                    className={`qr-code-header ${isQrFullScreen ? "fullscreen" : ""}`}
+                  >
+                    {isQrFullScreen && (
+                      <button
+                        className="close-btn"
+                        onClick={() => setIsQrFullScreen(false)}
+                      >
+                        &times;
+                      </button>
+                    )}
+                    <img
+                      src="/qrcode.png"
+                      alt="QR Code"
+                      onClick={() => setIsQrFullScreen(true)}
+                    />
+                    {!isQrFullScreen && <span>Scan moi !</span>}
+                  </li>
+                </ul>
 
                 <a className='menu-trigger'>
                     <span>Menu</span>
