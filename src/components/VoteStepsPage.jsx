@@ -98,21 +98,22 @@ const VoteStepsPage = () => {
               </div>
 
               {/* ✅ Bloc fixe en bas à droite */}
-<div className="floating-nav-bottom-right">
-  <button
-    className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm me-2"
-    disabled={currentStep === 0}
-    onClick={() => setCurrentStep((prev) => (prev > 0 ? prev - 1 : prev))}
-  >
-    <i className="bi bi-arrow-left me-1"></i> {t("previous")}
-  </button>
-  <button
-    className="btn btn-primary btn-sm rounded-pill shadow-sm"
-    onClick={handleNext}
-  >
-    {t("next")} <i className="bi bi-arrow-right ms-1"></i>
-  </button>
-</div>
+              <div className="floating-nav-bottom-right">
+                <button
+                  className="btn btn-outline-secondary btn-sm rounded-pill shadow-sm me-2"
+                  disabled={currentStep === 0}
+                  onClick={() => setCurrentStep((prev) => (prev > 0 ? prev - 1 : prev))}
+                >
+                  <i className="bi bi-arrow-left me-1"></i> {t("previous")}
+                </button>
+                
+                <button
+                  className="btn btn-primary btn-sm rounded-pill shadow-sm"
+                  onClick={handleNext}
+                >
+                  {t("next")} <i className="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
 
             </Card.Body>
           </Card>

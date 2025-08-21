@@ -1,71 +1,83 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "../../public/assets/css/listeCandidat.css";
-import Felicitations from './Felicitations';
-import { useLanguage } from '../context/LanguageProvider.jsx'; // ✅ importer
+import Felicitations from "./Felicitations";
+import { useLanguage } from "../context/LanguageProvider.jsx";
+import { getAllCandidats } from "../services/election/candidatService.js";
+import { getElecteur } from "../services/electeur/electeurService.js";
+import { createVote } from "../services/vote/voteService.js";
 
-const candidats = [
-  {
-    id: 1,
-    nom: "DOE, John",
-    parti: "Indépendant(e)",
-    image: "/assets/images/profile-image.jpg",
-  },
-  {
-    id: 2,
-    nom: "DOE, Sandra",
-    parti: "Appartenance politique",
-    image: "/assets/img/sandra.jpg",
-  },
-  {
-    id: 3,
-    nom: "UNETELLE, Anne",
-    parti: "Appartenance politique",
-    image: "/assets/img/anne.jpg",
-  },
-  {
-    id: 4,
-    nom: "UNTEL, Pierre",
-    parti: "Appartenance politique",
-    image: "/assets/img/pierre.jpg",
-  },
-];
-
-const ListeCandidat = () => {
+const ListeCandidat = ({ electionId }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [slideOut, setSlideOut] = useState(false);
   const [showFelicitations, setShowFelicitations] = useState(false);
-  const { t } = useLanguage(); // ✅ hook de langue
+  const [candidats, setCandidats] = useState([]);
+  const { t } = useLanguage();
 
-  const handleSelect = (id) => {
-    setSelectedId(id);
-  };
+  // ✅ Charger les candidats depuis l’API
+  useEffect(() => {
+    const fetchCandidats = async () => {
+      try {
+        let data = await getAllCandidats();
+        data = data.filter((c) => c.election === electionId);
 
-  const handleSubmit = (e) => {
+        const candidatsAvecElecteur = await Promise.all(
+          data.map(async (c) => {
+            let electeur = null;
+            try {
+              const res = await getElecteur(c.id_electeur);
+              electeur = res.data;
+            } catch (err) {
+              console.error("Erreur getElecteur :", err);
+            }
+            return { ...c, electeur };
+          })
+        );
+
+        setCandidats(candidatsAvecElecteur);
+      } catch (err) {
+        console.error("❌ Erreur chargement candidats :", err);
+      }
+    };
+
+    fetchCandidats();
+  }, [electionId]);
+
+  const handleSelect = (id) => setSelectedId(id);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (selectedId !== null) {
+    if (!selectedId) {
+      alert(t("select_candidate_warning"));
+      return;
+    }
+
+    try {
+
+      // const electeurId = localStorage.getItem("electeur_id"); // ou ce que tu stockes
+
+      // ⚡ Envoi du vote à l’API
+      await createVote({
+        election: electionId,
+        candidat: selectedId,
+      });
+
+
+      // 🎉 Animation + félicitations
       const button = e.currentTarget;
-      button.classList.add('delete');
+      button.classList.add("delete");
 
       setTimeout(() => {
-        button.classList.remove('delete');
+        button.classList.remove("delete");
         setSlideOut(true);
 
-        setTimeout(() => {
-          setShowFelicitations(true);
-        }, 600);
-      }, 3200);
-    } else {
-      alert(t("select_candidate_warning")); // ✅ traduction
+        setTimeout(() => setShowFelicitations(true), 600);
+      }, 1200);
+    } catch (err) {
+      console.error("❌ Erreur soumission vote :", err);
+      alert(t("vote_failed"));
     }
   };
-
-  useEffect(() => {
-    const buttons = document.querySelectorAll('.button');
-    buttons.forEach((button) => {
-      button.onclick = null;
-    });
-  }, []);
 
   if (showFelicitations) return <Felicitations />;
 
@@ -78,18 +90,26 @@ const ListeCandidat = () => {
       <div className="candidate-list full-width-two-columns">
         {candidats.map((candidat) => (
           <div
-            key={candidat.id}
-            className={`candidate-card-vertical ${selectedId === candidat.id ? "selected" : ""}`}
-            onClick={() => handleSelect(candidat.id)}
+            key={candidat.id_candidat}
+            className={`candidate-card-vertical ${
+              selectedId === candidat.id_candidat ? "selected" : ""
+            }`}
+            onClick={() => handleSelect(candidat.id_candidat)}
           >
-            <div className="candidate-number">{candidat.id}</div>
+            <div className="candidate-number">{candidat.numCandidat}</div>
             <div
               className="candidate-photo-vertical"
-              style={{ backgroundImage: `url(${candidat.image})` }}
+              style={{ backgroundImage: `url(${candidat.photo_candidat})` }}
             />
             <div className="candidate-info-vertical">
-              <div className="candidate-name">{candidat.nom}</div>
-              <div className="candidate-party">{candidat.parti}</div>
+              <div className="candidate-name">
+                {candidat.electeur
+                  ? `${candidat.electeur.prenom_electeur} ${candidat.electeur.nom_electeur}`
+                  : candidat.pseudo}
+              </div>
+              <div className="candidate-party">
+                {candidat.biographie || t("no_party")}
+              </div>
             </div>
             <div className="selection-indicator">
               <i className="bi bi-check-circle-fill" />

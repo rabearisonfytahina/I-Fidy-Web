@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from './context/LanguageProvider.jsx'; // Chemin correct
 import { Link } from 'react-router-dom';
+import { getAllTypeElections } from './services/election/typeElectionService.js';
 
 
 function App() {
   const { t, changeLanguage, language } = useLanguage(); // Ajoutez 'language' ici
   const [isQrFullScreen, setIsQrFullScreen] = useState(false);
-
+  const [typeElection, setTypeElection] = useState([]);
   // useEffect pour l'initialisation des scripts externes et des écouteurs d'événements
   useEffect(() => {
     // Initialiser WOW.js si elle existe
@@ -59,6 +60,10 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []); // Le tableau de dépendances vide garantit que cela ne s'exécute qu'une fois au montage
+
+
+
+
 
   return (
     <>
@@ -281,11 +286,11 @@ function App() {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-3 col-sm-6">
+            <div className="col-lg-4 col-sm-4">
               <a href="#">
                 <div className="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                   <div className="hidden-content">
-                    <h4>{t('candidate')} 1</h4>
+                    {/* <h4>{t('candidate')} 1</h4> */}
                     <p>{t('candidate_description')}</p>
                   </div>
                   <div className="showed-content">
@@ -294,12 +299,12 @@ function App() {
                 </div>
               </a>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            <div className="col-lg-4 col-sm-4">
               <a href="#">
                 <div className="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.4s">
                   <div className="hidden-content">
-                    <h4>{t('candidate')} 2</h4>
-                    <p>{t('candidate_description')}</p>
+                    {/* <h4>{t('candidate')} 2</h4> */}
+                    <p>{t('candidate_description2')}</p>
                   </div>
                   <div className="showed-content">
                     <img src="/assets/images/portfolio-image.png" alt={t('candidate') + ' 2'} />
@@ -307,12 +312,12 @@ function App() {
                 </div>
               </a>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            <div className="col-lg-4 col-sm-4">
               <a href="#">
                 <div className="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.5s">
                   <div className="hidden-content">
                     <h4>{t('candidate')} 3</h4>
-                    <p>{t('candidate_description')}</p>
+                    <p>{t('candidate_description3')}</p>
                   </div>
                   <div className="showed-content">
                     <img src="/assets/images/portfolio-image.png" alt={t('candidate') + ' 3'} />
@@ -320,7 +325,7 @@ function App() {
                 </div>
               </a>
             </div>
-            <div className="col-lg-3 col-sm-6">
+            {/* <div className="col-lg-3 col-sm-6">
               <a href="#">
                 <div className="item wow bounceInUp" data-wow-duration="1s" data-wow-delay="0.6s">
                   <div className="hidden-content">
@@ -332,7 +337,7 @@ function App() {
                   </div>
                 </div>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -1,20 +1,38 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageProvider.jsx';
 import ReconnaissanceFaciale from './ReconnaissanceFaciale';
+// import { lookupElecteur } from '../services/authElecteur/authElecteurService.js';
 import "../../public/assets/css/formulaireElecteur.css";
+import { lookupElecteur } from '../services/authElecteur/authElecteurService.js';
 
-const FormulaireElecteur = () => {
+const FormulaireElecteur = ({ electionId }) => {
   const [slideOut, setSlideOut] = useState(false);
   const [showFacialPage, setShowFacialPage] = useState(false);
+  const [formData, setFormData] = useState({ nom: "", prenom: "", numCIN: "" });
+  const [tempToken, setTempToken] = useState(null);
   const { t } = useLanguage();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSlideOut(true);
-    setTimeout(() => setShowFacialPage(true), 600);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  if (showFacialPage) return <ReconnaissanceFaciale />;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log('FormData : ', formData);
+      const res = await lookupElecteur(formData);
+
+      
+      setTempToken(res.temp_token); // ✅ reçu du backend
+      setSlideOut(true);
+      setTimeout(() => setShowFacialPage(true), 600);
+    } catch (err) {
+      alert("❌ Électeur introuvable ou erreur");
+      console.error(err);
+    }
+  };
+
+  if (showFacialPage) return <ReconnaissanceFaciale idElection={electionId} tempToken={tempToken} />;
 
   return (
     <div className={`formulaire-electeur-page ${slideOut ? "slide-left-out" : ""}`}>
@@ -22,15 +40,15 @@ const FormulaireElecteur = () => {
       <form onSubmit={handleSubmit} className="formulaire">
         <label>
           {t("lastname")} :
-          <input type="text" required />
+          <input name="nom" value={formData.nom} onChange={handleChange} type="text" required />
         </label>
         <label>
           {t("firstname")} :
-          <input type="text" required />
+          <input name="prenom" value={formData.prenom} onChange={handleChange} type="text" required />
         </label>
         <label>
           {t("id_number")} :
-          <input type="text" required />
+          <input name="numCIN" value={formData.numCIN} onChange={handleChange} type="text" required />
         </label>
         <button type="submit" className="submit-btn">
           {t("submit")}
