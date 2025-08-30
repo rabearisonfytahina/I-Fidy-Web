@@ -2,13 +2,41 @@ import { useLanguage } from '../context/LanguageProvider.jsx';
 import { Link } from 'react-router-dom';
  import VoteStepsPage from "../components/VoteStepsPage.jsx";
  import 'bootstrap-icons/font/bootstrap-icons.css';
- import React, {  useState } from 'react';
+ import React, {  useEffect, useState } from 'react';
+import { deleteSession } from '../services/electeur_auth/electeurAuthService.js';
 
 
 
 function Vote() {
   const { t, changeLanguage, language } = useLanguage();
   const [isQrFullScreen, setIsQrFullScreen] = useState(false);
+
+
+    useEffect(() => {
+      const authData = localStorage.getItem("electeurAuth");
+  
+      // Si refresh → invalider côté backend
+      const handleBeforeUnload = async () => {
+        if (authData) {
+          const { authId } = JSON.parse(authData);
+          try {
+            await deleteSession(authId); // endpoint de suppression à créer côté backend
+            localStorage.removeItem("electeurAuth");
+          } catch (err) {
+            console.error("Erreur suppression session :", err);
+          }
+          localStorage.removeItem("electeurAuth");
+        }
+        else{
+          console.log("Pas de session active");
+        }
+      };
+  
+      handleBeforeUnload(); // Appel immédiat au cas où
+  
+      window.addEventListener("beforeunload", handleBeforeUnload);
+      return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+    }, []);
 
   return (
     <>
