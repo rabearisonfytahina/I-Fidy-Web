@@ -1,6 +1,5 @@
 const BASE_URL = 'http://localhost:8000/api/';
 
-
 const api = {
   get: async (endpoint) => {
     const res = await fetch(BASE_URL + endpoint);
@@ -11,14 +10,10 @@ const api = {
 
   post: async (endpoint, data) => {
     const isFormData = data instanceof FormData;
-    const token = localStorage.getItem("access_token");
 
     const res = await fetch(BASE_URL + endpoint, {
       method: 'POST',
-      headers: {
-        ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
+      headers: isFormData ? undefined : { 'Content-Type': 'application/json' },
       body: isFormData ? data : JSON.stringify(data),
     });
 
@@ -31,16 +26,13 @@ const api = {
     return res.json();
   },
 
+
   put: async (endpoint, data) => {
     const isFormData = data instanceof FormData;
-    const token = localStorage.getItem("access_token");
 
     const res = await fetch(BASE_URL + endpoint, {
       method: 'PUT',
-      headers: {
-        ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
+      headers: isFormData ? undefined : { 'Content-Type': 'application/json' },
       body: isFormData ? data : JSON.stringify(data),
     });
 
@@ -54,10 +46,8 @@ const api = {
   },
 
   delete: async (endpoint) => {
-    const token = localStorage.getItem("access_token");
     const res = await fetch(BASE_URL + endpoint, {
       method: 'DELETE',
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
     if (!res.ok) throw new Error(`DELETE ${endpoint} failed`);
     return res.ok;
@@ -65,6 +55,3 @@ const api = {
 };
 
 export default api;
-
-
-

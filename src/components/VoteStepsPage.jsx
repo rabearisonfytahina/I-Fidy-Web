@@ -62,7 +62,7 @@ const VoteStepsPage = () => {
           >
             <Card.Body>
               <Card.Title className="text-center mb-5">
-                <h2 className="fw-bold text-primary">🗳️ {t("title")}</h2>
+                <h2 className="fw-bold text-primary mb-3">{t("title")}</h2>
               </Card.Title>
 
               <div className="stepper-container">

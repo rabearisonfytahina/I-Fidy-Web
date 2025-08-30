@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
  import VoteStepsPage from "../components/VoteStepsPage.jsx";
  import 'bootstrap-icons/font/bootstrap-icons.css';
  import React, {  useState } from 'react';
- 
+
 
 
 function Vote() {
