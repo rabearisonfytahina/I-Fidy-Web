@@ -1,0 +1,351 @@
+/* Animations et styles pour la page de vote */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease-out;
+}
+
+.loader-spinner {
+  text-align: center;
+  color: white;
+}
+
+.loader-spinner p {
+  font-size: 1.2rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.vote-container.loading {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.vote-container.loaded {
+  opacity: 1;
+}
+
+.animated-fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.background-animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.floating-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(40px);
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(45deg, #4e54c8, #8f94fb);
+  top: 10%;
+  left: 10%;
+  animation: float 15s ease-in-out infinite;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, #ff7e5f, #feb47b);
+  top: 60%;
+  right: 15%;
+  animation: float 12s ease-in-out infinite reverse;
+}
+
+.circle-3 {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(45deg, #00c9ff, #92fe9d);
+  bottom: 10%;
+  left: 20%;
+  animation: float 18s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(20px, 20px) rotate(5deg); }
+  50% { transform: translate(0, 40px) rotate(0deg); }
+  75% { transform: translate(-20px, 20px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Amélioration des cartes d'élection */
+.election-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background: white;
+  position: relative;
+}
+
+.election-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.election-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #4e54c8, #8f94fb);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.election-card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-active {
+  border-left: 4px solid #4CAF50 !important;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-En-cours .status-badge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-En-préparation .status-badge {
+  background-color: #fff3e0;
+  color: #ef6c00;
+}
+
+.status-Terminée .status-badge {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+.vote-button {
+  transition: all 0.3s ease;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-weight: 600;
+  border: none;
+}
+
+.vote-button:not(:disabled):hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Animation pour les étapes de vote */
+.stepper-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+
+.step-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 3px solid #e0e0e0;
+  transition: all 0.4s ease;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.step-item.active .step-icon {
+  border-color: #4e54c8;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(78, 84, 200, 0.3);
+}
+
+.step-item.completed .step-icon {
+  border-color: #4CAF50;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.step-number {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #ff6b6b;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.step-label {
+  margin-top: 12px;
+  text-align: center;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.step-item.active .step-label {
+  color: #4e54c8;
+  font-weight: 600;
+  transform: translateY(5px);
+}
+
+.step-link {
+  position: absolute;
+  top: 35px;
+  height: 3px;
+  background: #e0e0e0;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.step-link.connected {
+  background: linear-gradient(90deg, #4CAF50, #8f94fb);
+}
+
+/* Animation de transition entre les pages */
+.slide-left-out {
+  animation: slideLeftOut 0.6s forwards;
+}
+
+@keyframes slideLeftOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.slide-right-out {
+  animation: slideRightOut 0.6s forwards;
+}
+
+@keyframes slideRightOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Navigation flottante améliorée */
+.floating-nav-bottom-right {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+  animation: fadeInUp 0.5s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stepper-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 40px;
+  }
+  
+  .step-item {
+    flex-direction: row;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  
+  .step-label {
+    margin-top: 0;
+    margin-left: 15px;
+    text-align: left;
+  }
+  
+  .step-link {
+    top: 0;
+    left: 35px;
+    width: 3px;
+    height: 40px;
+  }
+  
+  .floating-nav-bottom-right {
+    bottom: 20px;
+    right: 20px;
+    flex-direction: column;
+  }
+}

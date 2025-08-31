@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLanguage } from "./context/LanguageProvider.jsx";
-import Banner from "./components/home/Banner.jsx";
-import About from "./components/home/About.jsx";
+
+import About from "./components/home/About.jsx"
+import Banner from "./components/home/Banner.jsx"
+import Blog from "./components/home/Blog.jsx"
+import Contact from "./components/home/Contact.jsx"
+import Portfolio from "./components/home/Portfolio.jsx"
 import Services from "./components/home/Services.jsx";
-import Portfolio from "./components/home/Portfolio.jsx";
-import Blog from "./components/home/Blog.jsx";
 import Footer from "./components/utils/Footer.jsx";
 import Header from "./components/utils/Header.jsx";
-import Contact from "./components/home/Contact.jsx";
 
 
 function App() {
