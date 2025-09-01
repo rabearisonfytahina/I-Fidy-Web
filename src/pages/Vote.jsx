@@ -1,8 +1,8 @@
 import { useLanguage } from '../context/LanguageProvider.jsx';
 import { Link } from 'react-router-dom';
- import VoteStepsPage from "../components/VoteStepsPage.jsx";
- import 'bootstrap-icons/font/bootstrap-icons.css';
- import React, {  useEffect, useState } from 'react';
+import VoteStepsPage from "../components/VoteStepsPage.jsx";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { useEffect, useState } from 'react';
 import { deleteSession } from '../services/electeur_auth/electeurAuthService.js';
 
 
@@ -12,31 +12,31 @@ function Vote() {
   const [isQrFullScreen, setIsQrFullScreen] = useState(false);
 
 
-    useEffect(() => {
-      const authData = localStorage.getItem("electeurAuth");
-  
-      // Si refresh → invalider côté backend
-      const handleBeforeUnload = async () => {
-        if (authData) {
-          const { authId } = JSON.parse(authData);
-          try {
-            await deleteSession(authId); // endpoint de suppression à créer côté backend
-            localStorage.removeItem("electeurAuth");
-          } catch (err) {
-            console.error("Erreur suppression session :", err);
-          }
+  useEffect(() => {
+    const authData = localStorage.getItem("electeurAuth");
+
+    // Si refresh → invalider côté backend
+    const handleBeforeUnload = async () => {
+      if (authData) {
+        const { authId } = JSON.parse(authData);
+        try {
+          await deleteSession(authId); // endpoint de suppression à créer côté backend
           localStorage.removeItem("electeurAuth");
+        } catch (err) {
+          console.error("Erreur suppression session :", err);
         }
-        else{
-          console.log("Pas de session active");
-        }
-      };
-  
-      handleBeforeUnload(); // Appel immédiat au cas où
-  
-      window.addEventListener("beforeunload", handleBeforeUnload);
-      return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-    }, []);
+        localStorage.removeItem("electeurAuth");
+      }
+      else {
+        console.log("Pas de session active");
+      }
+    };
+
+    handleBeforeUnload(); // Appel immédiat au cas où
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
 
   return (
     <>
@@ -75,25 +75,25 @@ function Vote() {
                       </a>
                     </li>
                   </div>
-                      {/* QR Code à droite de la langue */}
-   <li
-  className={`qr-code-header ${isQrFullScreen ? "fullscreen" : ""}`}
->
-  {isQrFullScreen && (
-    <button
-      className="close-btn"
-      onClick={() => setIsQrFullScreen(false)}
-    >
-      &times;
-    </button>
-  )}
-  <img
-    src="/qrcode.png"
-    alt="QR Code"
-    onClick={() => setIsQrFullScreen(true)}
-  />
-  {!isQrFullScreen && <span>Scan moi !</span>}
-</li>
+                  {/* QR Code à droite de la langue */}
+                  <li
+                    className={`qr-code-header ${isQrFullScreen ? "fullscreen" : ""}`}
+                  >
+                    {isQrFullScreen && (
+                      <button
+                        className="close-btn"
+                        onClick={() => setIsQrFullScreen(false)}
+                      >
+                        &times;
+                      </button>
+                    )}
+                    <img
+                      src="/qrcode.png"
+                      alt="QR Code"
+                      onClick={() => setIsQrFullScreen(true)}
+                    />
+                    {!isQrFullScreen && <span>Scan moi !</span>}
+                  </li>
                 </ul>
 
                 <a className="menu-trigger">
@@ -105,29 +105,29 @@ function Vote() {
         </div>
       </header>
 
- 
-
-<div
-  className="main-banne wow fadeIn d-flex justify-content-center align-items-center"
-  id="top"
-  data-wow-duration="1s"
-  data-wow-delay="0.5s"
-  style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }} 
->
-  
-
- 
-
-  
-    <VoteStepsPage />
-
-</div>
 
 
-      
+      <div
+        className="main-banne wow fadeIn d-flex justify-content-center align-items-center"
+        id="top"
+        data-wow-duration="1s"
+        data-wow-delay="0.5s"
+        style={{ minHeight: '100vh', backgroundColor: '#f8f9fa' }}
+      >
+
+
+
+
+
+        <VoteStepsPage />
+
+      </div>
+
+
+
     </>
   );
-  
+
 }
 
 export default Vote;

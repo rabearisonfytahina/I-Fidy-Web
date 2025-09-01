@@ -146,7 +146,7 @@ const NextVotePage = () => {
                 {isUpcoming && (
                   <span className="countdown">{formatCountdown(election.startDate)}</span>
                 )}
-                {isEnded && <span>Terminée</span>}
+                {isEnded && <span>{t('terminate')}</span>}
               </div>
             </div>
           </div>
@@ -169,12 +169,12 @@ const NextVotePage = () => {
               ? t("participate")
               : isUpcoming
               ? t("coming_soon")
-              : "Consulter les résultats"}
+              : t("view_results")}
           </button>
           
           {isEnded && (
             <button className="results-button">
-              Voir les résultats
+              {t("view_results")}
             </button>
           )}
         </div>
@@ -195,8 +195,8 @@ const NextVotePage = () => {
         }`}
       >
         <div className="page-header">
-          <h2 className="page-title">🗳️ {t("available_elections")}</h2>
-          <p className="page-subtitle">Participez aux élections en cours ou consultez les résultats des élections terminées</p>
+          <h2 className="page-title">{t("available_elections")}</h2>
+          <p className="page-subtitle">{t("nextpage_subtitle")}</p>
         </div>
 
         <div className="election-tabs">
@@ -204,25 +204,25 @@ const NextVotePage = () => {
             className={`tab ${activeTab === "all" ? "active" : ""}`}
             onClick={() => setActiveTab("all")}
           >
-            Toutes les élections
+            {t("all")} ({elections.length})   
           </button>
           <button 
             className={`tab ${activeTab === "active" ? "active" : ""}`}
             onClick={() => setActiveTab("active")}
           >
-            En cours ({inProgress.length})
+            {t("in_progress")} ({inProgress.length})
           </button>
           <button 
             className={`tab ${activeTab === "upcoming" ? "active" : ""}`}
             onClick={() => setActiveTab("upcoming")}
           >
-            À venir ({upcoming.length})
+            {t('upcoming')} ({upcoming.length})
           </button>
           <button 
             className={`tab ${activeTab === "ended" ? "active" : ""}`}
             onClick={() => setActiveTab("ended")}
           >
-            Terminées ({ended.length})
+            {t('terminate')} ({ended.length})
           </button>
         </div>
 
@@ -230,7 +230,7 @@ const NextVotePage = () => {
           {loading ? (
             <div className="loading-container">
               <div className="loading-spinner"></div>
-              <p>Chargement des élections...</p>
+              <p>{t("electeur_charge")}</p>
             </div>
           ) : getFilteredElections().length > 0 ? (
             <div className="election-grid">
@@ -240,8 +240,8 @@ const NextVotePage = () => {
             <div className="no-elections-container">
               <div className="empty-state">
                 <span className="empty-icon">🗳️</span>
-                <h3>Aucune élection disponible</h3>
-                <p>Il n'y a actuellement aucune élection dans cette catégorie.</p>
+                <h3>{t('no_election')}</h3>
+                <p>{t('no_election_text')}</p>
               </div>
             </div>
           )}

@@ -56,14 +56,14 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
 
   const handleStartScan = async () => {
     setScanStarted(true);
-    setError('');
+    setError("");
 
     // Capture image depuis vidéo
     const canvas = canvasRef.current;
     const video = videoRef.current;
     
     if (!video || video.readyState !== 4) {
-      setError("La caméra n'est pas prête. Veuillez réessayer.");
+      setError(t("camera_not_ready"));
       setScanStarted(false);
       return;
     }
@@ -87,7 +87,7 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
         setOtpSent(true);
       } catch (err) {
         console.error("Erreur API FaceVerify:", err);
-        setError("Échec de la reconnaissance faciale. Veuillez réessayer.");
+        setError(t("face_recognition_failed"));
         setScanStarted(false);
       }
     }, "image/jpeg");
@@ -96,10 +96,10 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     if (password.trim() === '') {
-      setError('Veuillez entrer le code reçu par email');
+      setError(t("otp_required"));
       setLoading(false);
       return;
     }
@@ -120,11 +120,11 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
           setTimeout(() => setShowNextVote(true), 600);
         }, 1000);
       } else {
-        setError("Code invalide ou expiré");
+        setError(t("otp_invalid"));
       }
     } catch (err) {
       console.error("❌ OTP invalide:", err);
-      setError("Code invalide ou expiré");
+      setError(t("otp_invalid"));
     } finally {
       setLoading(false);
     }
@@ -136,8 +136,8 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
     <div className="face-recognition-container">
       <div className={`face-recognition-page ${slideOut ? "slide-left-out" : ""}`}>
         <div className="recognition-header">          
-          <h1 className="page-title">Vérification en deux étapes</h1>
-          <p className="page-subtitle">Pour garantir la sécurité de votre vote, nous avons besoin de vérifier votre identité</p>
+          <h1 className="page-title">{t("two_step_verification")}</h1>
+          <p className="page-subtitle">{t("verify_identity_subtitle")}</p>
         </div>
 
         {!otpSent ? (
@@ -155,7 +155,7 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
                 ) : (
                   <div className="camera-placeholder">
                     <div className="placeholder-icon">📷</div>
-                    <p>Caméra non disponible</p>
+                    <p>{t("camera_unavailable")}</p>
                   </div>
                 )}
                 <canvas ref={canvasRef} style={{ display: "none" }} />
@@ -166,12 +166,12 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
               </div>
               
               <div className="camera-instructions">
-                <h3>Positionnez votre visage</h3>
+                <h3>{t("position_face_instruction")}</h3>
                 <ul>
-                  <li>Assurez-vous d'être dans un endroit bien éclairé</li>
-                  <li>Positionnez votre visage dans le cercle</li>
-                  <li>Maintenez une expression neutre</li>
-                  <li>Enlevez les lunettes de soleil ou masques</li>
+                  <li>{t("well_lit_instruction")}</li>
+                  <li>{t("face_in_circle_instruction")}</li>
+                  <li>{t("neutral_expression_instruction")}</li>
+                  <li>{t("remove_glasses_mask_instruction")}</li>
                 </ul>
               </div>
             </div>
@@ -182,7 +182,7 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
                 onClick={() => window.history.back()}
                 disabled={scanStarted}
               >
-                ← Retour
+                ← {t("back")}
               </button>
               
               <button
@@ -193,10 +193,10 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
                 {scanStarted ? (
                   <>
                     <span className="button-spinner"></span>
-                    Vérification en cours...
+                    {t("scanning")}
                   </>
                 ) : (
-                  'Lancer la reconnaissance faciale'
+                  t("start_scan")
                 )}
               </button>
             </div>
@@ -205,26 +205,26 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
           <div className="otp-verification-section">
             <div className="verification-header">
               <div className="success-icon">✅</div>
-              <h2>Vérification faciale réussie</h2>
-              <p>Un code de sécurité a été envoyé à votre adresse email</p>
+              <h2>{t("face_verification_success")}</h2>
+              <p>{t("otp_sent_email")}</p>
             </div>
             
             <form onSubmit={handlePasswordSubmit} className="otp-form">
               <div className="form-group">
                 <label htmlFor="otp-code" className="form-label">
-                  Code de vérification
+                  {t("otp_label")}
                 </label>
                 <input
                   type="text"
                   id="otp-code"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Saisissez le code à 6 chiffres"
+                  placeholder={t("otp_placeholder")}
                   className="otp-input"
                   required
                   maxLength="6"
                 />
-                <p className="input-hint">Vérifiez votre boîte email pour le code de sécurité</p>
+                <p className="input-hint">{t("otp_hint")}</p>
               </div>
               
               {error && <div className="error-message">{error}</div>}
@@ -235,7 +235,7 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
                   className="nav-button secondary"
                   onClick={() => setOtpSent(false)}
                 >
-                  ← Retour à la caméra
+                  ← {t("back_to_camera")}
                 </button>
                 
                 <button
@@ -246,10 +246,10 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
                   {loading ? (
                     <>
                       <span className="button-spinner"></span>
-                      Vérification...
+                      {t("verifying")}
                     </>
                   ) : (
-                    'Valider et continuer →'
+                    t("validate_and_continue")
                   )}
                 </button>
               </div>
@@ -261,8 +261,8 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
           <div className="success-overlay">
             <div className="success-content">
               <div className="success-animation">✅</div>
-              <h3>Vérification réussie!</h3>
-              <p>Redirection vers l'interface de vote...</p>
+              <h3>{t("verification_success")}</h3>
+              <p>{t("redirecting_to_vote")}</p>
             </div>
           </div>
         )}
