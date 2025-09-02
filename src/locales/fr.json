@@ -157,6 +157,7 @@
   "aide_using_platform_title": "Comment utiliser la plateforme",
   "aide_using_platform_content": "La plateforme vous guide étape par étape pour un vote sécurisé et rapide.",
   "aide_tips_title": "Conseils et bonnes pratiques",
-  "aide_tips_content": "Vérifiez votre connexion internet, ne partagez jamais vos identifiants, et suivez les instructions."
+  "aide_tips_content": "Vérifiez votre connexion internet, ne partagez jamais vos identifiants, et suivez les instructions.",
+  "form_help_text":"Besoin d'aide"
 }
 

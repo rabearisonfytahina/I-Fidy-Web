@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageProvider.jsx.jsx";
-import "../../src/assets/css/reconnaissanceFaciale.css";
+import "../assets/css/reconnaissanceFaciale.css";
 import ListeCandidat from "./ListeCandidat";
 import { verifyFacial, verifyOtp } from "../services/electeur_auth/electeurAuthService.js";
 
@@ -222,7 +222,7 @@ const ReconnaissanceFaciale = ({ idElection, idAuth }) => {
                   placeholder={t("otp_placeholder")}
                   className="otp-input"
                   required
-                  maxLength="6"
+                  maxLength="15"
                 />
                 <p className="input-hint">{t("otp_hint")}</p>
               </div>

@@ -1,3 +1,199 @@
+/* listeCandidat.css - Styles supplémentaires */
+
+/* Animation de chargement */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Style pour le message de vote déjà effectué */
+.already-voted-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 20px;
+}
+
+.already-voted-card {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  width: 100%;
+}
+
+.warning-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.already-voted-card h2 {
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.countdown {
+  height: 6px;
+  background: #f1f1f1;
+  border-radius: 3px;
+  margin-top: 25px;
+  overflow: hidden;
+}
+
+.countdown-progress {
+  height: 100%;
+  width: 100%;
+  background: #e74c3c;
+  border-radius: 3px;
+  animation: countdown 3s linear forwards;
+}
+
+@keyframes countdown {
+  0% { width: 100%; }
+  100% { width: 0%; }
+}
+
+/* Animation de sélection */
+.candidate-card-vertical {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.candidate-card-vertical:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-card-vertical.selected {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+.candidate-card-vertical.pulse {
+  animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Bouton de soumission amélioré */
+.submit-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 30px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.5);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.submit-button.shake {
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.submit-button.submitting {
+  background: #27ae60;
+  padding-right: 50px;
+}
+
+.button-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.button-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-loading .spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animation de transition */
+.vote-container {
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.slide-left-out {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .candidate-list.full-width-two-columns {
+    grid-template-columns: 1fr;
+  }
+  
+  .submit-button {
+    width: 100%;
+  }
+}
+
+
+
+
+/* ----------------------------- */
+
+
 .vote-container {
   display: flex;
   flex-direction: column;
