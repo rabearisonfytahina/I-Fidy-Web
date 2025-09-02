@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../public/assets/css/nextVotePage.css";
+import "../../src/assets/css/nextVotePage.css";
 import { useLanguage } from "../context/LanguageProvider.jsx";
 import FormulaireElecteur from "./FormulaireElecteur.jsx";
 import VoteStepsPage from "./VoteStepsPage.jsx";

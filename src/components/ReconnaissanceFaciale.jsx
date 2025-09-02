@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageProvider.jsx.jsx";
-import "../../public/assets/css/reconnaissanceFaciale.css";
+import "../../src/assets/css/reconnaissanceFaciale.css";
 import ListeCandidat from "./ListeCandidat";
 import { verifyFacial, verifyOtp } from "../services/electeur_auth/electeurAuthService.js";
 

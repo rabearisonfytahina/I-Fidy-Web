@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../public/assets/css/listeCandidat.css";
+import "../../src/assets/css/listeCandidat.css";
 import Felicitations from "./Felicitations";
 import { useLanguage } from "../context/LanguageProvider.jsx";
 import { getAllCandidats } from "../services/election/candidatService.js";

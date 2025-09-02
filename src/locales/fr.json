@@ -133,5 +133,30 @@
   "verification_success": "Vérification réussie!",
   "redirecting_to_vote": "Redirection vers l'interface de vote...",
   "vote_failed": "Échec de l'enregistrement du vote. Veuillez réessayer.",
-  "no_party": "Aucune biographie disponible"
+  "no_party": "Aucune biographie disponible",
+ 
+  "chatbot_welcome": "Bonjour ! Je suis votre assistant pour le vote électronique à Madagascar.",
+  "chatbot_title": "Assistant I-FIDY",
+  "chatbot_how_to_vote_question": "Comment voter ?",
+  "chatbot_how_to_vote_answer": "Pour voter, vous devez être inscrit et avoir votre carte électorale.",
+  "chatbot_check_card_question": "Vérifier ma carte électorale ?",
+  "chatbot_check_card_answer": "Entrez votre numéro de carte électorale dans la section 'Recherche carte électorale'.",
+  "chatbot_vote_security_question": "Sécurité du vote ?",
+  "chatbot_vote_security_answer": "Notre système utilise une authentification forte et un chiffrement avancé pour garantir un vote sécurisé.",
+  "chatbot_contact_support_question": "Contact assistance ?",
+  "chatbot_contact_support_answer": "Appelez le +261 010 020 0340 ou utilisez la section Contact pour toute assistance.",
+   "aide_title": "Centre d'aide",
+  "aide_vote_navigation_title": "Comment naviguer vers le vote",
+  "aide_vote_navigation_content": "Pour voter, connectez-vous et cliquez sur 'Voter'. Ensuite, choisissez l'élection en cours.",
+  "aide_choose_vote_title": "Comment choisir votre vote",
+  "aide_choose_vote_content": "Sélectionnez les candidats ou propositions sur lesquels vous souhaitez voter, puis confirmez.",
+  "aide_facial_recognition_title": "Reconnaissance faciale",
+  "aide_facial_recognition_content": "Vous devez passer la reconnaissance faciale pour authentifier votre identité.",
+  "aide_personal_info_title": "Nom, Prénom, CIN",
+  "aide_personal_info_content": "Assurez-vous que vos informations personnelles sont correctes avant de voter.",
+  "aide_using_platform_title": "Comment utiliser la plateforme",
+  "aide_using_platform_content": "La plateforme vous guide étape par étape pour un vote sécurisé et rapide.",
+  "aide_tips_title": "Conseils et bonnes pratiques",
+  "aide_tips_content": "Vérifiez votre connexion internet, ne partagez jamais vos identifiants, et suivez les instructions."
 }
+

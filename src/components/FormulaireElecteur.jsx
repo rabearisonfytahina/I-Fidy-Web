@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageProvider.jsx';
 import ReconnaissanceFaciale from './ReconnaissanceFaciale';
-import "../../public/assets/css/formulaireElecteur.css";
+import "../../src/assets/css/formulaireElecteur.css";
 import { verifyIdentifiants } from '../services/electeur_auth/electeurAuthService.js';
 
 // Composant de notification

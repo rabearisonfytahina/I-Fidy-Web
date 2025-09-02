@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLanguage } from "./context/LanguageProvider.jsx";
+import { WOW } from "wowjs"; // <- Import correct
 
 import About from "./components/home/About.jsx"
 import Banner from "./components/home/Banner.jsx"
@@ -9,7 +10,7 @@ import Portfolio from "./components/home/Portfolio.jsx"
 import Services from "./components/home/Services.jsx";
 import Footer from "./components/utils/Footer.jsx";
 import Header from "./components/utils/Header.jsx";
-
+import ChatBot from './components/ChatBot.jsx';
 
 function App() {
   const { t, changeLanguage, language } = useLanguage();
@@ -17,7 +18,13 @@ function App() {
 
   // Gestion des animations et menu mobile
   useEffect(() => {
-    if (window.WOW) new window.WOW().init();
+    // Initialiser WOW.js
+    const wow = new WOW({
+      live: false // évite de réobserver le DOM pour les nouvelles animations
+    });
+    wow.init();
+
+    // Menu mobile
     const menuTrigger = document.querySelector(".menu-trigger");
     const mainNav = document.querySelector(".header-area .nav");
 
@@ -33,31 +40,30 @@ function App() {
     };
   }, []);
 
+  // Gestion session
   useEffect(() => {
-        const authData = localStorage.getItem("electeurAuth");
-    
-        // Si refresh → invalider côté backend
-        const handleBeforeUnload = async () => {
-          if (authData) {
-            const { authId } = JSON.parse(authData);
-            try {
-              await deleteSession (authId); // endpoint de suppression à créer côté backend
-              localStorage.removeItem("electeurAuth");
-            } catch (err) {
-              console.error("Erreur suppression session :", err);
-            }
-            localStorage.removeItem("electeurAuth");
-          }
-          else{
-            console.log("Pas de session active");
-          }
-        };
-    
-        handleBeforeUnload(); // Appel immédiat au cas où
-    
-        window.addEventListener("beforeunload", handleBeforeUnload);
-        return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-      }, []);
+    const authData = localStorage.getItem("electeurAuth");
+
+    const handleBeforeUnload = async () => {
+      if (authData) {
+        const { authId } = JSON.parse(authData);
+        try {
+          await deleteSession(authId); // endpoint backend
+          localStorage.removeItem("electeurAuth");
+        } catch (err) {
+          console.error("Erreur suppression session :", err);
+        }
+        localStorage.removeItem("electeurAuth");
+      } else {
+        console.log("Pas de session active");
+      }
+    };
+
+    handleBeforeUnload();
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
 
   return (
     <>
@@ -75,11 +81,13 @@ function App() {
       <Blog t={t} />
       <Contact t={t} />
       <Footer t={t} />
+        <ChatBot />
     </>
   );
 }
 
 export default App;
+
 
 // import React, { useEffect, useState } from 'react';
 // import { useLanguage } from './context/LanguageProvider.jsx'; // Chemin correct

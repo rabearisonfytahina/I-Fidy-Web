@@ -95,5 +95,30 @@
   "confirm": "Manamarina",
    "congrats_title": "Arahabaina !",
   "congrats_text": "Voarakitra soa aman-tsara ny safidinao. Misaotra amin'ny fandraisanao anjara.",
-   "select_to_continue": "Mifidiana fifidianana ankehitriny vao afaka manohy."
+   "select_to_continue": "Mifidiana fifidianana ankehitriny vao afaka manohy.",
+
+  "chatbot_welcome": "Miarahaba! Izaho no mpanampy anao amin'ny fifidianana elektronika eto Madagasikara.",
+  "chatbot_title": "Mpanampy I-FIDY",
+  "chatbot_how_to_vote_question": "Ahoana ny fomba hifidianana?",
+  "chatbot_how_to_vote_answer": "Mba hifidianana dia tokony hisoratra anarana ianao ary hanana kara-pifidianana.",
+  "chatbot_check_card_question": "Hamarino ny kara-pifidianako",
+  "chatbot_check_card_answer": "Ampidiro ny nomeraon'ny kara-pifidiananao ao amin'ny fizarana 'Recherche carte électorale'.",
+  "chatbot_vote_security_question": "Ahoana ny fiarovana ny fifidianana?",
+  "chatbot_vote_security_answer": "Mampiasa fanamarinana matanjaka sy encryption avo lenta ny rafitra ho fiarovana ny fifidianana.",
+  "chatbot_contact_support_question": "Mifandray amin'ny fanampiana",
+  "chatbot_contact_support_answer": "Miantsoa +261 010 020 0340 na ampiasao ny fizarana Contact ho an'ny fanampiana.",
+ "aide_title": "Ivontoerana Fanampiana",
+  "aide_vote_navigation_title": "Ahoana ny fandehanana mankany amin'ny fifidianana",
+  "aide_vote_navigation_content": "Mba handatsaka ny vato, midira ary tsindrio ny 'Voter'. Avy eo, mifidiana ny fifidianana misy.",
+  "aide_choose_vote_title": "Ahoana ny fisafidianana ny vato",
+  "aide_choose_vote_content": "Safidio ny kandidà na ny tolo-kevitra tianao hovana, avy eo manamafy.",
+  "aide_facial_recognition_title": "Fanaovana fanamarinana tarehy",
+  "aide_facial_recognition_content": "Tokony handalo fanamarinana tarehy ianao mba hanamarina ny maha-ianao anao.",
+  "aide_personal_info_title": "Anarana, Fanampinanarana, CIN",
+  "aide_personal_info_content": "Ataovy azo antoka fa marina ny mombamomba anao alohan'ny hifidianana.",
+  "aide_using_platform_title": "Ahoana ny fampiasana ny sehatra",
+  "aide_using_platform_content": "Ny sehatra dia manampy anao dingana-dingana ho an'ny fifidianana azo antoka sy haingana.",
+  "aide_tips_title": "Torohevitra sy fomba fanao tsara",
+  "aide_tips_content": "Hamarino ny fifandraisana internet anao, aza mizara ny kaontinao, ary araho ny toromarika."
+
   }

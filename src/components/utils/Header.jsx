@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../../../public/assets/css/header.css'
+import'../../../src/assets/css/header.css'
 
 const Header = ({ t, language, changeLanguage, isQrFullScreen, setIsQrFullScreen }) => {
   return (

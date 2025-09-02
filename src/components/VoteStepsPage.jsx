@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import confetti from "canvas-confetti";
 import { useLanguage } from "../context/LanguageProvider.jsx"; // ✅ Ajouter ceci
-import "../../public/assets/css/VoteStepsPage.css";
+import "../../src/assets/css/VoteStepsPage.css";        
 import NextVotePage from "../components/NextVotePage";
 
 // Enlève le texte brut pour le traduire via "t"

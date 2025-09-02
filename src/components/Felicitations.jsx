@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import confetti from "canvas-confetti";
-import "../../public/assets/css/felicitations.css";
+import "../../src/assets/css/felicitations.css";
 import { useLanguage } from "../context/LanguageProvider.jsx"; // ✅ support de langue
 
 const Felicitations = () => {
